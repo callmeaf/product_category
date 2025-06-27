@@ -5,6 +5,8 @@ namespace Callmeaf\ProductCategory\App\Http\Resources\Admin\V1;
 use Callmeaf\Base\App\Enums\DateTimeFormat;
 use Callmeaf\ProductCategory\App\Models\ProductCategory;
 use Callmeaf\ProductCategory\App\Repo\Contracts\ProductCategoryRepoInterface;
+use Callmeaf\Propertiable\App\Repo\Contracts\PropertiableRepoInterface;
+use Callmeaf\Property\App\Repo\Contracts\PropertyRepoInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,6 +26,10 @@ class ProductCategoryResource extends JsonResource
          * @var ProductCategoryRepoInterface $productCategoryRepo
          */
         $productCategoryRepo = app(ProductCategoryRepoInterface::class);
+        /**
+         * @var PropertiableRepoInterface $propertyRepo
+         */
+        $propRepo = app(PropertiableRepoInterface::class);
         return [
             'slug' => $this->slug,
             'parent_id' => $this->parent_id,
@@ -39,7 +45,8 @@ class ProductCategoryResource extends JsonResource
             'deleted_at' => $this->deleted_at,
             'deleted_at_text' => $this->deletedAtText(),
             'parent' => $productCategoryRepo->toResource($this->whenLoaded('parent')),
-            'children' => $productCategoryRepo->toResourceCollection($this->whenLoaded('children'))
+            'children' => $productCategoryRepo->toResourceCollection($this->whenLoaded('children')),
+            'props' => $propRepo->toResourceCollection($this->whenLoaded('props'))
         ];
     }
 }

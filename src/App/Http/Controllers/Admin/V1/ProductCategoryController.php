@@ -42,7 +42,7 @@ class ProductCategoryController extends AdminController implements HasMiddleware
      */
     public function show(string $id)
     {
-        return $this->productCategoryRepo->builder(fn($query) => $query->with(['children']))->findById(value: $id);
+        return $this->productCategoryRepo->builder(fn($query) => $query->with(['children','props']))->findById(value: $id);
     }
 
     /**

@@ -10,6 +10,7 @@ use Callmeaf\Base\App\Traits\Model\HasStatus;
 use Callmeaf\Base\App\Traits\Model\HasType;
 use Callmeaf\Product\App\Repo\Contracts\ProductRepoInterface;
 use Callmeaf\ProductToCategory\App\Repo\Contracts\ProductToCategoryRepoInterface;
+use Callmeaf\Propertiable\App\Traits\HasProps;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -17,7 +18,7 @@ class ProductCategory extends BaseModel
 {
      use SoftDeletes;
      use HasStatus,HasType,HasParent,HasDate,HasSlug;
-
+    use HasProps;
     protected $primaryKey = 'slug';
     protected $keyType = 'string';
     public $incrementing = false;
