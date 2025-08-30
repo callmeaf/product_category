@@ -32,6 +32,7 @@ class ProductCategoryResource extends JsonResource
         $propRepo = app(PropertiableRepoInterface::class);
         return [
             'slug' => $this->slug,
+            'title' => $this->title,
             'parent_id' => $this->parent_id,
             'status' => $this->status,
             'status_text' => $this->statusText,
